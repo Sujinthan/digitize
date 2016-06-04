@@ -1,7 +1,7 @@
 # Digitize
-An Android app that recognizes handwritten digits
+An Android app that lets users take a picture of a word and give definition of that word.
 
-This app lets users take a picture of a hand written digit. This picture is then send to the server. The server will put it through a neuarl network. The neural network will recognize the digit and send the result back to the user.
+This app lets users take a picture of a word. This picture is then send to the server. The server will put it through a Hidden Markov Model. The Hidden Markov Model will recognize the word and send the result back to the user.
 
 The app uses OKHTTP on the client side to send the data to the server. The server is written in Python and uses Flask. You can find the server code and the Neural Network code in the "engineapp" folder.
 
