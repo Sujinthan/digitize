@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements Camera.PictureCallback, Ca
     Bitmap sendbmp;
     boolean jpgbitmap;
     JSONArray mJSONArray;
-    private String  url = " http:/192.168.0.20:5000";
+    private String  url = " http:/192.168.0.11:5000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
