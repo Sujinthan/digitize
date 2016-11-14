@@ -147,7 +147,7 @@ def sigmoid_prime(z):
 if __name__== "__main__":
     import mnist_loader
     #training_Data,validation_data,test_data = mnist_loader.load('/mnt/c/Users/small/OneDrive/workspace/Digitize/engineapp',False,True )
-    #training_data,validation_data,test_data =  mnist_loader.load_data_wrapper()
-    training_data,test_data=mnist_loader.load()
-    net = Network([784,1000,128])
-    net.SGD(training_data,1000,128,3.0,test_data=test_data)
+    #mytraining_datas,mytest_data =  mnist_loader.loadData()
+    training_data,test_data=mnist_loader.loadData()
+    net = Network([784,62,128])
+    net.SGD(training_data,30,128,3.0,test_data=test_data)
