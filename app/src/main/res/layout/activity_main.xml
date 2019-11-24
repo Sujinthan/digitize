@@ -10,7 +10,7 @@
     tools:context="com.example.suji.define.MainActivity"
     android:layout_width="wrap_content"
     android:id="@+id/mainlayout"
-    tools:showIn="@layout/activity_main"
+
     android:layout_weight="100">
 
 
