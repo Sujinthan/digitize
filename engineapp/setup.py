@@ -110,9 +110,9 @@ def invertMoverImage ():
                 break
     print("done inverting")
 if __name__=='__main__':
-    #changeFolderName()
+    changeFolderName()
     #print("starting test folder")
-    #createTestFolder()
+    createTestFolder()
     print(countImages())
-    #invertImage()
+    invertImage()
     #invertMoverImage()
