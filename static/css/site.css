@@ -116,6 +116,3 @@ input[type="checkbox"].input-validation-error {
   cursor: pointer;
 }
 
-#can:hover {
-    cursor: url("static/images/brush.png") 15 12, auto;
-}
