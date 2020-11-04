@@ -1,145 +1,63 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - Letter Recognition</title>
+    <title>Letter Recognition</title>
     <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="static/css/site.css" />
     <link rel="stylesheet" type="text/css" href="static/css/crusor.css" />
     <script src="static/js/modernizr-2.6.2.js"></script>
     <script src="static/js/jquery-1.10.2.js"></script>
+    <script src="static/js/script.js"></script>
 </head>
-<script>
-    function init() {
-        canvas = document.getElementById('can');
-        ctx = canvas.getContext("2d");
-        w = canvas.width;
-        h = canvas.height;
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, w, h);
-        $('#can').mousedown(function (e) {
-            mousePressed = true;
-            Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
-        });
 
-        $('#can').mousemove(function (e) {
-            if (mousePressed) {
-                Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
-            }
-        });
-
-        $('#can').mouseup(function (e) {
-            mousePressed = false;
-        });
-        $('#can').mouseleave(function (e) {
-            mousePressed = false;
-        });
-    }
-
-    function Draw(x, y, isDown) {
-        if (isDown) {
-            canvas = document.getElementById('can');
-            ctx = canvas.getContext("2d");
-            ctx.beginPath();
-
-            ctx.lineCap = "round";
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(x, y);
-            ctx.strokeStyle = "black";
-            ctx.lineWidth = 5;
-            ctx.stroke();
-            ctx.closePath();
-        }
-        lastX = x; lastY = y;
-    }
-    function erase() {
-
-
-        ctx.clearRect(0, 0, w, h);
-        document.getElementById("canvasimg").style.display = "none";
-
-    }
-
-</script>
-<style>
-    #can:hover {
-        cursor: url("static/images/brush.png") 15 12, auto;
-    }
-</style>
 <body>
 
-    <div class="container body-content " >
+    <div class="container body-content ">
         <div class="cursor" id="cursor"></div>
-<div class="container">
+        <div class="container">
 
-    <h1 class="display mainHeader">Letter Recognition</h1>
-    <p class="lead subHeader">Use your mouse to write a letter from A-Z or a-z</p>
-</div>
+            <h1 class="display mainHeader">Letter Recognition</h1>
+            <p class="lead subHeader">Use your mouse to write a letter from A-Z or a-z</p>
+        </div>
 
-<div class="row mainRow">
-    <div class="row canvusHolder">
-        <canvas id="can" width="200" height="200" style="
+        <div class="row mainRow">
+            <div class="row canvusHolder">
+                <canvas id="can" width="200" height="200" style="
         border: 2px solid;" onmouseup="sendData()">
-        </canvas>
-    </div>
-    <img id="canvasimg" style="position:absolute;top:10%;left:52%; display:none;">
-    <div class="col resultButton">
-        <div id="loadingImage" style="    position: relative;
+                </canvas>
+            </div>
+            <img id="canvasimg" style="position:absolute;top:10%;left:52%; display:none;">
+            <div class="col resultButton">
+                <div id="loadingImage" style="    position: relative;
     width:111px;
     height:14px;
     background: rgba( 255, 255, 255, .8 ) url('static/images/loading.gif') 50% 50% no-repeat;"></div>
-        <p id="result" style="display:none;"></p>
+                <p id="result" style="display:none;"></p>
 
-    </div>
-    <br />
-    <br />
-    <div class="row clearbutton">
-        <div class="col buttonDiv" >
-            <button type="button" style="        position: relative;
+            </div>
+            <br />
+            <br />
+            <div class="row clearbutton">
+                <div class="col buttonDiv">
+                    <button type="button" style="        position: relative;
         bottom: 0;
         left: 50%;
         transform: translate(-50%, 0%);
-" class="btn btn-dark"  onclick="init()">Clear</button>
-            <!--<input class="btn btn-outline-dark" type="button" value="clear" id="clr" size="23" onclick="init()" style="position:relative;bottom:0;left:15%;">-->
+" class="btn btn-dark" onclick="init()">Clear</button>
+                    <!--<input class="btn btn-outline-dark" type="button" value="clear" id="clr" size="23" onclick="init()" style="position:relative;bottom:0;left:15%;">-->
+                </div>
+
+            </div>
+
         </div>
-
-    </div>
-
-</div>
     </div>
 
     <script src="static/js/jquery-1.10.2.js"></script>
     <script src="static/js/bootstrap.js"></script>
     <script src="static/js/respond.js"></script>
-    {% block scripts %}{% endblock %}
-
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
 
-        $('#loadingImage').hide();
-        init()
-    });
-
-    function sendData() {
-        $('#result').hide();
-        $('#loadingImage').show()
-        var scratchCanvas = document.getElementById('can');
-        var context = scratchCanvas.getContext('2d');
-        var dataURL = scratchCanvas.toDataURL("image/png");
-
-        $.ajax({
-            type: "POST",
-            url: "/imgToText",
-            data: {
-                imageBase64: dataURL
-            }
-        }).done(function (data) {
-            document.getElementById("result").innerHTML = "This is letter: " + data
-            $('#loadingImage').hide();
-            $('#result').show();
-        });
-    }
-</script>
 </html>
